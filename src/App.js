@@ -10,6 +10,14 @@ function App() {
 
   function handleSubmit(event) {
     event.preventDefault();
+    setErrorOccurred(false); // so that previous error is removed when the user re-submits the form with valid input
+    try {
+      let colors = new Values(color).all(10);
+      console.log(colors);
+    } catch (error) {
+      setErrorOccurred(true);
+      console.error(error.message);
+    }
   }
   return (
     <>
@@ -20,7 +28,8 @@ function App() {
             type="text"
             value={color}
             onChange={(event) => setColor(event.target.value)}
-            placeholder="f15025"
+            placeholder="e.g. #f15025"
+            className={errorOccurred ? "error" : ""}
           />
           <button className="btn" type="submit">
             Generate
