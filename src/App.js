@@ -28,14 +28,34 @@ function App() {
     <>
       <section className="container">
         <h3>Color generator</h3>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            value={color}
-            onChange={(event) => setColor(event.target.value)}
-            placeholder="e.g. #337df5"
-            className={errorOccurred ? "error" : ""}
-          />
+        <form className="form" onSubmit={handleSubmit}>
+          <div className="input-container">
+            <label htmlFor="hexValue" className="label">
+              Hex value
+            </label>
+            <input
+              type="text"
+              value={color}
+              onChange={(event) => setColor(event.target.value)}
+              placeholder="e.g. #337df5"
+              id="hexValue"
+              className={errorOccurred ? "error" : ""}
+            />
+          </div>
+
+          <div className="input-container">
+            <label htmlFor="weight" className="label">
+              Weight
+            </label>
+            <input
+              type="number"
+              value={color}
+              onChange={(event) => setColor(event.target.value)}
+              placeholder="e.g. 10"
+              id="weight"
+              className={errorOccurred ? "error" : ""}
+            />
+          </div>
           <button className="btn" type="submit">
             Generate
           </button>
