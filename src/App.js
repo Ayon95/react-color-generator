@@ -8,12 +8,14 @@ function App() {
   const [errorOccurred, setErrorOccurred] = useState(false);
   const [list, setList] = useState([]);
 
+  const weightIncrementValue = 10;
+
   function handleSubmit(event) {
     event.preventDefault();
     setErrorOccurred(false); // so that previous error is removed when the user re-submits the form with valid input
     try {
-      let colors = new Values(color).all(10);
-      console.log(colors);
+      let colors = new Values(color).all(weightIncrementValue);
+      setList(colors);
     } catch (error) {
       setErrorOccurred(true);
       console.error(error.message);
@@ -37,7 +39,16 @@ function App() {
         </form>
       </section>
 
-      <section className="colors"></section>
+      <section className="colors">
+        {list.map((color, index) => (
+          <SingleColor
+            key={index}
+            color={color}
+            index={index}
+            weightIncrementValue={weightIncrementValue}
+          />
+        ))}
+      </section>
     </>
   );
 }
