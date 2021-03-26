@@ -4,20 +4,17 @@ import SingleColor from "./SingleColor";
 import Values from "values.js";
 
 function App() {
-  const weightIncrementValue = 10;
-
-  const [color, setColor] = useState("");
+  const [color, setColor] = useState("#337df5");
+  const [weight, setWeight] = useState(10);
   const [errorOccurred, setErrorOccurred] = useState(false);
-  const [list, setList] = useState(
-    new Values("#337df5").all(weightIncrementValue)
-  );
+  const [list, setList] = useState(new Values(color).all(weight));
   const baseColorIndex = (list.length - 1) / 2;
 
   function handleSubmit(event) {
     event.preventDefault();
     setErrorOccurred(false); // so that previous error is removed when the user re-submits the form with valid input
     try {
-      let colors = new Values(color).all(weightIncrementValue);
+      const colors = new Values(color).all(Number.parseFloat(weight));
       setList(colors);
     } catch (error) {
       setErrorOccurred(true);
@@ -49,8 +46,8 @@ function App() {
             </label>
             <input
               type="number"
-              value={color}
-              onChange={(event) => setColor(event.target.value)}
+              value={weight}
+              onChange={(event) => setWeight(event.target.value)}
               placeholder="e.g. 10"
               id="weight"
               className={errorOccurred ? "error" : ""}
