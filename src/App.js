@@ -4,11 +4,14 @@ import SingleColor from "./SingleColor";
 import Values from "values.js";
 
 function App() {
+  const weightIncrementValue = 10;
+
   const [color, setColor] = useState("");
   const [errorOccurred, setErrorOccurred] = useState(false);
-  const [list, setList] = useState([]);
-
-  const weightIncrementValue = 10;
+  const [list, setList] = useState(
+    new Values("#337df5").all(weightIncrementValue)
+  );
+  const baseColorIndex = (list.length - 1) / 2;
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -30,7 +33,7 @@ function App() {
             type="text"
             value={color}
             onChange={(event) => setColor(event.target.value)}
-            placeholder="e.g. #f15025"
+            placeholder="e.g. #337df5"
             className={errorOccurred ? "error" : ""}
           />
           <button className="btn" type="submit">
@@ -45,7 +48,7 @@ function App() {
             key={index}
             color={color}
             index={index}
-            weightIncrementValue={weightIncrementValue}
+            baseColorIndex={baseColorIndex}
           />
         ))}
       </section>
